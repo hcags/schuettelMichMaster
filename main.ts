@@ -7,8 +7,9 @@ radio.onReceivedNumber(function (receivedNumber) {
     led.unplot(receivedNumber - 1, currentLives)
 })
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
-    let gameStart = 0
     if (!(gameStart)) {
+        radio.sendNumber(difficult)
+        gameStart = true
         backTimer = 5
         basic.showNumber(backTimer)
         basic.pause(1000)
@@ -32,13 +33,26 @@ input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
         music.playTone(698, music.beat(BeatFraction.Double))
     }
 })
+input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
+    if (!(gameStart)) {
+        difficult += 1
+        if (difficult > 3) {
+            difficult = 1
+        }
+        basic.showNumber(difficult)
+    }
+})
 let backTimer = 0
 let currentLives = 0
 let gamerLives: number[] = []
+let gameStart = false
+let difficult = 0
+difficult = 1
+gameStart = false
 radio.setGroup(1)
 gamerLives[1] = 5
 gamerLives[2] = 5
 gamerLives[3] = 5
 gamerLives[4] = 5
 gamerLives[5] = 5
-basic.showIcon(IconNames.Asleep)
+basic.showNumber(difficult)
