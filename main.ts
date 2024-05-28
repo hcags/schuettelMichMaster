@@ -12,10 +12,14 @@ input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
         backTimer = 5
         basic.showNumber(backTimer)
         basic.pause(1000)
+        music.playTone(523, music.beat(BeatFraction.Whole))
         while (backTimer > 0) {
             backTimer += -1
             basic.showNumber(backTimer)
             basic.pause(1000)
+            if (backTimer > 0) {
+                music.playTone(523, music.beat(BeatFraction.Whole))
+            }
         }
         radio.sendString("gameStart")
         basic.showLeds(`
@@ -25,6 +29,7 @@ input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
             # # # # #
             # # # # #
             `)
+        music.playTone(698, music.beat(BeatFraction.Double))
     }
 })
 let backTimer = 0
